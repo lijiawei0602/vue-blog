@@ -20,7 +20,6 @@ const store = new Vuex.Store({
             return axios.get(tagApi.getAllTags).then(res => {
                 if(res.data.success){
                     context.commit("get_all_tags", res.data.tagArr);
-                    console.log(res.data);
                 }
                 return new Promise((resolve, reject) => {
                     resolve(res);
