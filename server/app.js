@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
 import bodyParser from 'koa-bodyParser';
+import cors from 'koa2-cors';
 
 import config from './configs';
 import middleware from './middleware';
@@ -16,6 +17,9 @@ const app = new Koa();
 //中间件
 app.use(middleware());
 app.use(bodyParser());
+app.use(cors({
+    allowMethods: ['GET', 'POST', 'DELETE',"OPTIONS", "PUT", "PATCH"],
+}));
 onerror(app);
 
 //解决history模式下的路径文件报错

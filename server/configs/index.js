@@ -2,7 +2,7 @@ import fs from 'fs';
 
 let config = {
     app : {
-        port : process.env.port || 2222,
+        port : process.env.port || 8086,
         base : '/api'
     },
     mongodb : {

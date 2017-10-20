@@ -21,8 +21,8 @@ export async function createTag(ctx) {
         name: tagName
     });
 
-    const result = await Tag.save().catch(err => {
-        ctx.throw(500,"服务区错误");
+    const result = await newTag.save().catch(err => {
+        ctx.throw(500,"服务器错误");
     });
     ctx.body = {
         success: true,
@@ -31,8 +31,8 @@ export async function createTag(ctx) {
 };
 
 export async function getAllTags(ctx){
-    const tagArr = Tag.find().catch(err => {
-        ctx.throw(500,"服务器错误");
+    const tagArr = await Tag.find().catch(err => {
+        ctx.throw(500, '服务器内部错误')
     });
     ctx.body = {
         success: true,

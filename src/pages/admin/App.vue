@@ -9,7 +9,10 @@
 
 <script>
 </script>
-<style lang="less" scoped>
+<style lang="less">
+  html, body{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  }
   #app{
     width: 100%;
   }

@@ -9,6 +9,8 @@ export async function createArticle(ctx){
     const publish = ctx.request.body.publish;
     const createTime = new Date;
     const lastEditTime = new Date();
+
+
     if(title == ''){
         ctx.throw(400,"标题不能为空");
     }
@@ -28,6 +30,8 @@ export async function createArticle(ctx){
         createTime,
         lastEditTime
     });
+
+    console.log(article);
 
     let createResult = await article.save().catch(err => {
         ctx.throw(500,"服务器内部错误");
@@ -63,7 +67,7 @@ export async function getAllArticles(ctx){
         articleArr = await Article.find()
             .populate("tags")
             .skip(skip)
-            limit(limit)
+            .limit(limit)
             .sort({ createTime: -1 }).catch(err => {
                 ctx.throw(500,"服务器错误");
             });
@@ -87,6 +91,7 @@ export async function getAllArticles(ctx){
             ctx.throw(500,"服务器错误");
         });
     }
+
     allPage = Math.ceil(allNum / limit);
     ctx.body = {
         success:true,
@@ -156,11 +161,12 @@ export async function getAllPublishArticles(ctx){
 
 /*----- 修改文章 -----*/
 export async function modifyArticle(ctx){
-    const id = ctx.query.id;
+    const id = ctx.params.id;
     const title = ctx.request.body.title;
     const content = ctx.request.body.content;
     const abstract = ctx.request.body.abstract;
     const tags = ctx.request.body.tags;
+
     if(title == ''){
         ctx.throw(400,"标题不能为空");
     }
@@ -170,9 +176,6 @@ export async function modifyArticle(ctx){
     if(abstract == ''){
         ctx.throw(400,"摘要不能为空");
     }
-    if(tags.length == 0){
-        ctx.throw(400,"标签不能为空");
-    }
 
     const article = await Article.findByIdAndUpdate(id, { $set: ctx.request.body }).catch(err => {
         if(err.name === "CastError"){
@@ -180,16 +183,15 @@ export async function modifyArticle(ctx){
         }else{
             ctx.throw(500,"服务器错误");
         }
-
-        ctx.body = {
-            success: true
-        };
     });
+    ctx.body = {
+        success: true
+    };
 };
 
 /*----- 删除文章 -----*/
 export async function deleteArticle(ctx){
-    const id = ctx.query.id;
+    const id = ctx.params.id;
     const article = await Article.findByIdAndRemove(id).catch(err => {
         if(err.name == "CastError"){
             ctx.throw(400,"id不存在");
@@ -226,7 +228,8 @@ export async function getArticle(ctx){
 
 /*----- 修改文章发表状态为:true -----*/
 export async function publishArticle(ctx){
-    const id = ctx.query.id;
+    const id = ctx.params.id;
+
     const article = await Article.findByIdAndUpdate(id, { $set: { publish: true }}).catch(err => {
         if(err.name == 'CastName'){
             ctx.throw(400,"id不存在");
