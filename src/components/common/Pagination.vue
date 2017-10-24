@@ -1,7 +1,7 @@
 <template>
   <ul class="pagination">
     <li class="pagination-button" @click="prevPage"><</li>
-    <li class="pagination-item" v-for="page in pageArr" @click="switchPage(page)" :class="{ 'pagination-item-active': curPage == page }">{{ page }}</li>
+    <li class="pagination-item" v-for="page in pageArr" @click="switchPage(page)" :key="page" :class="{ 'pagination-item-active': curPage == page }">{{ page }}</li>
     <li class="pagination-button" @click="nextPage">></li>
   </ul>
 </template>

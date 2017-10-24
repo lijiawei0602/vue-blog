@@ -131,20 +131,17 @@ export async function getAllPublishArticles(ctx){
         });
     }else{
         let tagArr = tag.split(",");
-
         articleArr = await Article.find({
             publish: true,
-            tags: { '$in': tagArr }
+            tags: { "$in": tagArr }
         })
-        .populate("tags")
-        .skip(skip)
-        .limit(limit)
-        .sort({ createTime: -1 }).catch(err => {
-            ctx.throw(500,"服务器错误");
-        });
+            .populate("tags")
+            .sort({ createTime: -1})
+            .skip(skip).catch(err => {
+                ctx.throw(500,"服务器错误");
+            });
         allNum = await Article.find({
-            publish: true,
-            tags: { '$in': tagArr }
+            tags: { "$in": tagArr }
         }).count().catch(err => {
             ctx.throw(500,"服务器错误");
         });
@@ -166,6 +163,7 @@ export async function modifyArticle(ctx){
     const content = ctx.request.body.content;
     const abstract = ctx.request.body.abstract;
     const tags = ctx.request.body.tags;
+
 
     if(title == ''){
         ctx.throw(400,"标题不能为空");
@@ -207,7 +205,7 @@ export async function deleteArticle(ctx){
 
 /*----- 按照ID获取对应文章 -----*/
 export async function getArticle(ctx){
-    const id = ctx.query.id;
+    const id = ctx.params.id;
     if(id == ''){
         ctx.throw(400,"id不能为空");
     }

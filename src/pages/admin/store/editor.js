@@ -129,7 +129,7 @@ const actions = {
         if(article.content.indexOf("<!--more-->") !== -1){
             abstract = article.content.split("<!--more-->")[0];
         }else{
-            abstract = "abstract";
+            abstract = article.content.substr(0,80);
         }
         data = Object.assign({abstract: abstract}, article);
 

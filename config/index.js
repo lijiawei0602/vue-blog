@@ -5,7 +5,7 @@ var build = {
   env: require('./prod.env'),
   assetsRoot: path.resolve(__dirname, '../dist'),
   assetsSubDirectory: 'static',
-  assetsPublicPath: '/',
+  assetsPublicPath: './',
   productionSourceMap: true,
   productionGzip: false,
   productionGzipExtensions: ['js', 'css']

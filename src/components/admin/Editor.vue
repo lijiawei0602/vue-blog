@@ -30,7 +30,10 @@
 <script>
 import { mapGetters ,mapActions, mapMutations } from 'vuex';
 import SimpleMDE from 'simplemde';
+
 import css from 'simplemde/dist/simplemde.min.css';
+import css2 from '../../assets/css/syntax.styl';
+import css3 from '../../assets/css/markdown.styl';
 
 import debounce from '../../lib/debounce.js';
 import marked from '../../lib/marked.js';
@@ -115,8 +118,8 @@ export default {
 			if(content.indexOf("<!--more-->") !== -1){
 				abstract = content.split("<!--more-->")[0];
 			}else{
-				this.$message.error("请填写摘要");
-				return;
+				abstract = content.substr(0, 80);
+				// this.$message.error("请填写摘要");
 			}
 			const article = {
 				title: title,
@@ -125,7 +128,6 @@ export default {
 				tags: this.currentArticle.tags,
 				lastEditTime: new Date()
 			};
-
 			this.$store.dispatch("SAVE_ARTICLE", {
 				id: this.currentArticle.id,
 				article
@@ -135,7 +137,7 @@ export default {
 						message: "保存成功",
 						type: "success"
 					});
-					this.GET_ALL_ARTICLES();
+					// this.GET_ALL_ARTICLES();
 				}
 			}).catch(err => {
 				this.$message.error(err.response.data.error);

@@ -1,7 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Hljs from 'highlight.js';
 
 Vue.use(Router);
+
+Vue.directive('hljs', function(el) {
+  let blocks = el.querySelectorAll('pre code');
+  Array.prototype.forEach.call(blocks, Hljs.highlightBlock);
+})
+
 
 const List = (cb) => {
     require.ensure([],() => {

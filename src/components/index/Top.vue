@@ -1,7 +1,8 @@
 <template>
   <header class="header">
-    <img src="../../assets/nav.png" alt="" class="header-nav" @click="toggleSideBox">
-    <router-link to="/" class="header-title" @click="clearSelect">lijiawei's Blog</router-link>
+    <img src="../../assets/nav.png" alt="" class="header-nav">
+    <img src="../../assets/nav.png" alt="" class="header-nav-mobile" @click.stop="toggleSideBox">
+    <router-link to="/" class="header-title" @click.native="clearSelect">lijiawei's Blog</router-link>
   </header>
 </template>
 <script>
@@ -35,11 +36,15 @@ export default {
     border-bottom: 1px solid #C2CCB8;
     background-color: white;
     &-nav{
+      display: block;
       float: left;
       margin-top: 14px;
       margin-left: 10px;
       line-height: 60px;
       cursor: pointer;
+    }
+    &-nav-mobile{
+      display: none;
     }
     &-title{
       margin-left: 10px;
@@ -47,6 +52,25 @@ export default {
       font-size: 20px;
       text-decoration: none;
       font-weight: bold;
+    }
+  }
+  @media screen and (max-width: 850px){
+    .header{
+      text-align: center;
+      &-title{
+        margin-left: 0;
+      }
+      &-nav{
+        display: none;
+      }
+      &-nav-mobile{
+        display: block;
+        float: left;
+        margin-top: 14px;
+        margin-left: 10px;
+        line-height: 60px;
+        cursor: pointer;
+      }
     }
   }
 </style>
