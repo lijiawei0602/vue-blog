@@ -10,7 +10,14 @@ export async function initUser(ctx){
 
     console.log(user);
 
-    if(user.length === 0){
+    if(user.length === 0 || user.password !== md5(config.admin.password)){
+        //当前没有用户或者用户经过配置文件已经修改
+        //先删除已有的用户表，再创建新用户
+        await User.deleteMany({}).catch(err => {
+            ctx.throw(500, err);
+        });
+
+
         user = new User({
             name: 'ljw',
             username: config.admin.user,

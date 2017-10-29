@@ -33,15 +33,11 @@ export default {
             }
             this.$store.dispatch("CREATE_TOKEN", info).then((res) => {
                 if(res.data.success){
-                    // this.$message({
-                    //     message: "登陆成功",
-                    //     type: "success"
-                    // });
                     //登录成功后跳转到首页
                     this.$router.push("/admin");
                 }
             }).catch((err) => {
-                // this.$message.error(err.response.data.error);
+                this.$message.error(err.response.data.error);
             });
         }
     }

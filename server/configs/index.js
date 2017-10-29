@@ -23,6 +23,7 @@ let config = {
 
 if(fs.existsSync(__dirname + "/private.js")){
     config = Object.assign(config , require("./private.js"));
+    console.log(config);
 }
 
 export default config;

@@ -2,15 +2,17 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://127.0.0.1:8086/api';
+
 Vue.use(Vuex);
 
 const tagApi = {
-    getAllTags: "http://localhost:8086/api/tags",
+    getAllTags: "/tags",
 };
 
 const articleApi = {
-    getAllPublishArticles: "http://localhost:8086/api/publishArticles",
-    getPublishArticle: "http://localhost:8086/api/articles/",
+    getAllPublishArticles: "/publishArticles",
+    getPublishArticle: "/articles/",
 }
 
 const store = new Vuex.Store({

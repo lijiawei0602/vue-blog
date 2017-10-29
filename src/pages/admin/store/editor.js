@@ -1,18 +1,20 @@
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://127.0.0.1:8086/api';
+
 const tagApi = {
-    getAllTags: "http://localhost:8086/api/tags",
-    deleteTag: "http://localhost:8086/api/tags/",
-    createTag: "http://localhost:8086/api/tags",
+    getAllTags: "/tags",
+    deleteTag: "/tags/",
+    createTag: "/tags",
 }
 
 const articleApi = {
-    saveArticle: "http://localhost:8086/api/articles/",
-    createArticle: "http://localhost:8086/api/articles",
-    publishArticle: "http://localhost:8086/api/articles/",
-    notPublishArticle: "http://localhost:8086/api/articles/",
-    deleteArticle: "http://localhost:8086/api/articles/",
-    getAllArticles:"http://localhost:8086/api/articles/"
+    saveArticle: "/articles/",
+    createArticle: "/articles",
+    publishArticle: "/articles/",
+    notPublishArticle: "/articles/",
+    deleteArticle: "/articles/",
+    getAllArticles:"/articles/"
 }
 
 const state = {
